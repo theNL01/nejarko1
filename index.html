@@ -7,55 +7,44 @@
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Nunito+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ice: #e8f4fd;
     --sky: #0ea5e9;
     --deep: #0369a1;
     --frost: #f0f9ff;
     --dark: #0c1a2e;
     --mid: #1e3a5f;
     --accent: #38bdf8;
-    --warm: #f97316;
     --text: #1e293b;
     --muted: #64748b;
     --white: #ffffff;
-    --card-bg: rgba(255,255,255,0.92);
     --border: rgba(14,165,233,0.18);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Nunito Sans', sans-serif;
-    color: var(--text);
-    background: var(--frost);
-    overflow-x: hidden;
-  }
+  body { font-family: 'Nunito Sans', sans-serif; color: var(--text); background: var(--frost); overflow-x: hidden; }
 
   /* ── NAV ── */
   nav {
     position: fixed; top: 0; width: 100%; z-index: 100;
-    background: rgba(12,26,46,0.95);
+    background: rgba(12,26,46,0.97);
     backdrop-filter: blur(12px);
     padding: 0 5%;
     display: flex; align-items: center; justify-content: space-between;
-    height: 64px;
+    height: 60px;
     border-bottom: 1px solid rgba(56,189,248,0.2);
   }
   .nav-logo {
     font-family: 'Unbounded', sans-serif;
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     color: var(--accent);
-    letter-spacing: 0px;
     text-decoration: none;
   }
   .nav-logo span { color: var(--white); }
-  .nav-links { display: flex; gap: 2rem; }
+  .nav-links { display: flex; gap: 1.5rem; }
   .nav-links a {
-    color: rgba(255,255,255,0.75);
+    color: rgba(255,255,255,0.7);
     text-decoration: none;
-    font-size: .78rem;
+    font-size: .72rem;
     font-weight: 600;
     letter-spacing: .8px;
     text-transform: uppercase;
@@ -65,504 +54,378 @@
   .nav-phone {
     color: var(--white);
     font-weight: 700;
-    font-size: 1.05rem;
+    font-size: .95rem;
     text-decoration: none;
-    display: flex; align-items: center; gap: .4rem;
   }
-  .nav-phone::before { content: '📞'; font-size: .9rem; }
 
   /* ── HERO ── */
   .hero {
-    min-height: 100vh;
+    min-height: 100svh;
     background: linear-gradient(135deg, var(--dark) 0%, var(--mid) 60%, #0a4a7a 100%);
     display: flex; align-items: center;
     position: relative; overflow: hidden;
-    padding-top: 64px;
+    padding: 80px 5% 3rem;
   }
   .hero::before {
     content: '';
     position: absolute; inset: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230ea5e9' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%230ea5e9' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
-  /* ice crystals */
-  .crystal {
-    position: absolute;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(56,189,248,0.15), transparent 70%);
+  .glow {
+    position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, rgba(56,189,248,0.12), transparent 70%);
     animation: pulse 4s ease-in-out infinite;
   }
-  .crystal:nth-child(1) { width: 600px; height: 600px; top: -200px; right: -100px; animation-delay: 0s; }
-  .crystal:nth-child(2) { width: 400px; height: 400px; bottom: -100px; left: -50px; animation-delay: 2s; }
-  @keyframes pulse {
-    0%,100% { transform: scale(1); opacity: .6; }
-    50% { transform: scale(1.08); opacity: 1; }
-  }
+  .glow:nth-child(1) { width: 500px; height: 500px; top: -150px; right: -80px; }
+  .glow:nth-child(2) { width: 350px; height: 350px; bottom: -80px; left: -40px; animation-delay: 2s; }
+  @keyframes pulse { 0%,100%{transform:scale(1);opacity:.6} 50%{transform:scale(1.08);opacity:1} }
 
-  /* hero layout */
-  .hero-inner {
-    position: relative; z-index: 2;
-    width: 100%;
-    padding: 0 8%;
-  }
-
-  .hero-content {
-    position: relative; z-index: 2;
-    max-width: 640px;
-  }
+  .hero-inner { position: relative; z-index: 2; width: 100%; }
   .hero-badge {
     display: inline-block;
     background: rgba(56,189,248,0.15);
     border: 1px solid rgba(56,189,248,0.4);
     color: var(--accent);
-    font-size: .72rem;
+    font-size: .68rem;
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
-    padding: .35rem 1rem;
+    padding: .3rem .9rem;
     border-radius: 20px;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
   }
   .hero h1 {
     font-family: 'Unbounded', sans-serif;
-    font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+    font-size: clamp(1.7rem, 6vw, 4rem);
     color: var(--white);
-    line-height: 1.1;
-    letter-spacing: -1px;
+    line-height: 1.15;
     font-weight: 900;
     margin-bottom: 1rem;
+    word-break: keep-all;
   }
   .hero h1 em { color: var(--accent); font-style: normal; }
-  .hero p {
+  .hero-desc {
     color: rgba(255,255,255,0.65);
-    font-size: 1rem;
+    font-size: .9rem;
     line-height: 1.7;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     max-width: 480px;
   }
-  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .hero-btns { display: flex; gap: .75rem; flex-wrap: wrap; }
   .btn-primary {
     background: var(--sky);
     color: var(--white);
-    padding: .85rem 2rem;
-    border-radius: 4px;
+    padding: .8rem 1.6rem;
+    border-radius: 6px;
     font-weight: 700;
-    font-size: .9rem;
+    font-size: .88rem;
     text-decoration: none;
-    letter-spacing: .5px;
-    transition: background .2s, transform .15s;
     border: none; cursor: pointer;
+    transition: background .2s, transform .15s;
+    display: inline-block;
   }
   .btn-primary:hover { background: var(--deep); transform: translateY(-2px); }
   .btn-outline {
     background: transparent;
     color: var(--white);
-    padding: .85rem 2rem;
+    padding: .8rem 1.6rem;
     border: 1.5px solid rgba(255,255,255,0.35);
-    border-radius: 4px;
+    border-radius: 6px;
     font-weight: 600;
-    font-size: .9rem;
+    font-size: .88rem;
     text-decoration: none;
-    letter-spacing: .5px;
     transition: border-color .2s, background .2s;
     cursor: pointer;
+    display: inline-block;
   }
   .btn-outline:hover { border-color: var(--accent); background: rgba(56,189,248,0.08); }
 
   .hero-stats {
     display: flex; gap: 2rem;
     margin-top: 2.5rem;
-    z-index: 2;
+    flex-wrap: wrap;
   }
-  .hero-stats .stat { text-align: left; }
   .stat-num {
     font-family: 'Unbounded', sans-serif;
-    font-size: 2.2rem;
+    font-size: 1.9rem;
     color: var(--accent);
     line-height: 1;
     font-weight: 700;
   }
   .stat-label {
-    color: rgba(255,255,255,0.5);
-    font-size: .7rem;
+    color: rgba(255,255,255,0.45);
+    font-size: .65rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-top: .2rem;
   }
 
   /* ── SECTIONS ── */
-  section { padding: 6rem 8%; }
+  section { padding: 4rem 5%; }
   .section-tag {
-    font-size: .7rem;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--sky);
-    margin-bottom: .8rem;
+    font-size: .65rem; font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--sky); margin-bottom: .6rem;
   }
   h2 {
     font-family: 'Unbounded', sans-serif;
-    font-size: clamp(1.6rem, 3vw, 2.4rem);
-    letter-spacing: -1px;
-    font-weight: 900;
-    color: var(--dark);
-    margin-bottom: 1rem;
-    line-height: 1.15;
+    font-size: clamp(1.3rem, 4vw, 2.2rem);
+    letter-spacing: -.5px; font-weight: 900;
+    color: var(--dark); margin-bottom: .8rem; line-height: 1.2;
   }
   .section-lead {
-    color: var(--muted);
-    font-size: .95rem;
-    line-height: 1.7;
-    max-width: 520px;
-    margin-bottom: 3rem;
+    color: var(--muted); font-size: .9rem; line-height: 1.7;
+    max-width: 520px; margin-bottom: 2.5rem;
   }
 
   /* ── SERVICES ── */
   .services { background: var(--white); }
   .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.2rem;
   }
   .service-card {
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 2rem;
+    border-radius: 10px; padding: 1.5rem;
     background: var(--frost);
     transition: box-shadow .25s, transform .25s, border-color .25s;
     position: relative; overflow: hidden;
   }
   .service-card::after {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 3px;
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
     background: linear-gradient(90deg, var(--sky), var(--accent));
-    transform: scaleX(0); transform-origin: left;
-    transition: transform .3s;
+    transform: scaleX(0); transform-origin: left; transition: transform .3s;
   }
-  .service-card:hover { box-shadow: 0 12px 40px rgba(14,165,233,0.12); transform: translateY(-4px); border-color: var(--sky); }
+  .service-card:hover { box-shadow: 0 10px 30px rgba(14,165,233,0.12); transform: translateY(-3px); border-color: var(--sky); }
   .service-card:hover::after { transform: scaleX(1); }
-  .service-icon { font-size: 2rem; margin-bottom: 1rem; }
-  .service-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--dark); margin-bottom: .6rem; }
-  .service-card p { font-size: .85rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.2rem; }
-  .service-price {
-    font-weight: 700;
-    color: var(--sky);
-    font-size: 1rem;
-  }
-  .service-price small { font-size: .75rem; color: var(--muted); font-weight: 400; }
+  .service-icon { font-size: 1.8rem; margin-bottom: .8rem; }
+  .service-card h3 { font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: .5rem; }
+  .service-card p { font-size: .82rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+  .service-price { font-weight: 700; color: var(--sky); font-size: .95rem; }
+  .service-price small { font-size: .72rem; color: var(--muted); font-weight: 400; }
 
-  /* ── HOW IT WORKS ── */
+  /* ── HOW ── */
   .how { background: var(--frost); }
   .steps { display: flex; gap: 0; flex-wrap: wrap; }
   .step {
-    flex: 1; min-width: 200px;
-    padding: 2rem;
-    position: relative;
-    text-align: center;
+    flex: 1; min-width: 160px; padding: 1.5rem;
+    position: relative; text-align: center;
   }
   .step:not(:last-child)::after {
-    content: '→';
-    position: absolute; right: -8px; top: 50%;
-    transform: translateY(-50%);
-    color: var(--sky); font-size: 1.4rem;
+    content: '→'; position: absolute; right: -8px; top: 44px;
+    color: var(--sky); font-size: 1.2rem;
   }
   .step-num {
-    width: 48px; height: 48px;
-    border-radius: 50%;
-    background: var(--sky);
-    color: var(--white);
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.4rem;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--sky); color: var(--white);
+    font-size: 1.1rem; font-weight: 700;
     display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 1rem;
+    margin: 0 auto .8rem;
   }
-  .step h3 { font-size: .95rem; font-weight: 700; margin-bottom: .5rem; color: var(--dark); }
-  .step p { font-size: .82rem; color: var(--muted); line-height: 1.5; }
+  .step h3 { font-size: .88rem; font-weight: 700; margin-bottom: .4rem; color: var(--dark); }
+  .step p { font-size: .78rem; color: var(--muted); line-height: 1.5; }
 
   /* ── CALCULATOR ── */
   #calculator { background: linear-gradient(135deg, var(--dark), var(--mid)); color: var(--white); }
   #calculator h2 { color: var(--white); }
   #calculator .section-lead { color: rgba(255,255,255,0.55); }
-
-  .calc-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: start;
-  }
-  @media(max-width: 768px) {
-    .calc-wrapper { grid-template-columns: 1fr; }
-    .hero-stats { display: none; }
-    nav .nav-links { display: none; }
-    .steps { flex-direction: column; }
-    .step::after { display: none; }
-  }
-
-  .calc-form { display: flex; flex-direction: column; gap: 1.2rem; }
-
+  .calc-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+  .calc-form { display: flex; flex-direction: column; gap: 1rem; }
   .field-label {
-    font-size: .75rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: .4rem;
-    display: block;
+    font-size: .72rem; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; color: rgba(255,255,255,0.55);
+    margin-bottom: .35rem; display: block;
   }
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
   select, input[type=text], input[type=number] {
-    width: 100%;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(56,189,248,0.25);
-    color: var(--white);
-    padding: .75rem 1rem;
-    border-radius: 6px;
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: .88rem;
-    outline: none;
-    transition: border-color .2s, background .2s;
-    appearance: none;
-    -webkit-appearance: none;
+    width: 100%; background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(56,189,248,0.25); color: var(--white);
+    padding: .7rem .9rem; border-radius: 6px;
+    font-family: 'Nunito Sans', sans-serif; font-size: .85rem;
+    outline: none; transition: border-color .2s, background .2s;
+    appearance: none; -webkit-appearance: none;
   }
   select { cursor: pointer; }
   select option { background: var(--mid); color: var(--white); }
-  select:focus, input:focus {
-    border-color: var(--accent);
-    background: rgba(56,189,248,0.1);
-  }
-  select:invalid { color: rgba(255,255,255,0.4); }
-
-  .checkbox-group { display: flex; flex-direction: column; gap: .6rem; }
+  select:focus, input:focus { border-color: var(--accent); background: rgba(56,189,248,0.1); }
+  .checkbox-group { display: flex; flex-direction: column; gap: .5rem; }
   .checkbox-item {
-    display: flex; align-items: center; gap: .75rem;
-    cursor: pointer;
-    padding: .6rem .8rem;
-    border-radius: 6px;
+    display: flex; align-items: center; gap: .65rem; cursor: pointer;
+    padding: .55rem .75rem; border-radius: 6px;
     border: 1px solid rgba(56,189,248,0.15);
     transition: background .2s, border-color .2s;
-    font-size: .85rem;
-    color: rgba(255,255,255,0.75);
-    user-select: none;
+    font-size: .82rem; color: rgba(255,255,255,0.75); user-select: none;
   }
   .checkbox-item:hover { background: rgba(56,189,248,0.07); border-color: rgba(56,189,248,0.3); }
   .checkbox-item input { display: none; }
   .checkmark {
-    width: 18px; height: 18px;
-    border: 1.5px solid rgba(56,189,248,0.4);
-    border-radius: 4px;
-    flex-shrink: 0;
+    width: 17px; height: 17px; border: 1.5px solid rgba(56,189,248,0.4);
+    border-radius: 4px; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
     transition: background .15s, border-color .15s;
   }
-  .checkbox-item input:checked + .checkmark {
-    background: var(--sky);
-    border-color: var(--sky);
-  }
-  .checkbox-item input:checked + .checkmark::after {
-    content: '✓';
-    color: white;
-    font-size: .7rem;
-    font-weight: 700;
-  }
-  .checkbox-item .extra-price {
-    margin-left: auto;
-    color: var(--accent);
-    font-weight: 600;
-    font-size: .8rem;
-  }
+  .checkbox-item input:checked + .checkmark { background: var(--sky); border-color: var(--sky); }
+  .checkbox-item input:checked + .checkmark::after { content: '✓'; color: white; font-size: .65rem; font-weight: 700; }
+  .checkbox-item .extra-price { margin-left: auto; color: var(--accent); font-weight: 600; font-size: .78rem; }
 
-  /* RESULT */
   .calc-result {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(56,189,248,0.2);
-    border-radius: 12px;
-    padding: 2.5rem;
-    position: sticky; top: 90px;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(56,189,248,0.2);
+    border-radius: 12px; padding: 2rem; position: sticky; top: 80px;
   }
-  .result-title {
-    font-family: 'Unbounded', sans-serif;
-    font-size: 1rem;
-    letter-spacing: 0;
-    font-weight: 700;
-    color: var(--accent);
-    margin-bottom: 1.5rem;
-  }
-  .result-rows { display: flex; flex-direction: column; gap: .8rem; margin-bottom: 1.5rem; }
+  .result-title { font-family: 'Unbounded', sans-serif; font-size: .95rem; font-weight: 700; color: var(--accent); margin-bottom: 1.2rem; }
+  .result-rows { display: flex; flex-direction: column; gap: .7rem; margin-bottom: 1.2rem; }
   .result-row {
     display: flex; justify-content: space-between; align-items: center;
-    font-size: .85rem;
-    color: rgba(255,255,255,0.6);
-    padding-bottom: .8rem;
-    border-bottom: 1px solid rgba(255,255,255,0.07);
+    font-size: .82rem; color: rgba(255,255,255,0.6);
+    padding-bottom: .7rem; border-bottom: 1px solid rgba(255,255,255,0.07);
   }
-  .result-row.total {
-    color: var(--white);
-    font-weight: 700;
-    font-size: 1rem;
-    border-bottom: none;
-    padding-top: .5rem;
-  }
-  .result-amount {
-    font-weight: 600;
-    color: var(--white);
-    font-size: .9rem;
-  }
-  .result-amount.total-amount {
-    font-family: 'Unbounded', sans-serif;
-    font-size: 1.6rem;
-    color: var(--accent);
-    letter-spacing: -1px;
-    font-weight: 700;
-  }
-  .calc-disclaimer {
-    font-size: .72rem;
-    color: rgba(255,255,255,0.3);
-    line-height: 1.5;
-    margin-bottom: 1.5rem;
-  }
+  .result-row.total { color: var(--white); font-weight: 700; font-size: .95rem; border-bottom: none; padding-top: .4rem; }
+  .result-amount { font-weight: 600; color: var(--white); font-size: .88rem; }
+  .result-amount.total-amount { font-family: 'Unbounded', sans-serif; font-size: 1.5rem; color: var(--accent); letter-spacing: -1px; font-weight: 700; }
+  .calc-disclaimer { font-size: .7rem; color: rgba(255,255,255,0.3); line-height: 1.5; margin-bottom: 1.2rem; }
   .btn-calc {
-    width: 100%;
-    background: var(--sky);
-    color: var(--white);
-    border: none;
-    padding: 1rem;
-    border-radius: 6px;
-    font-family: 'Nunito Sans', sans-serif;
-    font-weight: 700;
-    font-size: .95rem;
-    cursor: pointer;
-    letter-spacing: .5px;
+    width: 100%; background: var(--sky); color: var(--white); border: none;
+    padding: .9rem; border-radius: 6px; font-family: 'Nunito Sans', sans-serif;
+    font-weight: 700; font-size: .9rem; cursor: pointer; letter-spacing: .5px;
     transition: background .2s, transform .15s;
   }
   .btn-calc:hover { background: var(--deep); transform: translateY(-2px); }
 
-  /* ── WHY US ── */
+  /* ── WHY ── */
   .why { background: var(--white); }
-  .why-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 2rem;
-  }
-  .why-item {
-    display: flex; gap: 1rem; align-items: flex-start;
-  }
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+  .why-item { display: flex; gap: .9rem; align-items: flex-start; }
   .why-icon {
-    width: 48px; height: 48px;
-    background: var(--frost);
-    border: 1px solid var(--border);
-    border-radius: 10px;
+    width: 44px; height: 44px; background: var(--frost);
+    border: 1px solid var(--border); border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.3rem;
-    flex-shrink: 0;
+    font-size: 1.2rem; flex-shrink: 0;
   }
-  .why-text h3 { font-size: .95rem; font-weight: 700; margin-bottom: .35rem; }
-  .why-text p { font-size: .82rem; color: var(--muted); line-height: 1.5; }
+  .why-text h3 { font-size: .9rem; font-weight: 700; margin-bottom: .3rem; }
+  .why-text p { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── GUARANTEE ── */
+  .guarantee { background: var(--frost); }
+  .guarantee-inner {
+    max-width: 860px; margin: 0 auto;
+    display: flex; gap: 2.5rem; align-items: center; flex-wrap: wrap;
+  }
+  .guarantee-avatar { flex-shrink: 0; text-align: center; }
+  .avatar-circle {
+    width: 110px; height: 110px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--sky), var(--deep));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.8rem; margin: 0 auto .8rem;
+  }
+  .guarantee-name { font-weight: 700; font-size: .9rem; color: var(--dark); }
+  .guarantee-role { font-size: .75rem; color: var(--muted); margin-top: .2rem; }
+  .guarantee-body { flex: 1; min-width: 240px; }
+  .guarantee-quote {
+    border-left: 3px solid var(--sky); padding-left: 1.1rem;
+    margin: 0 0 1.3rem; color: var(--text);
+    font-size: .9rem; line-height: 1.75; font-style: normal;
+  }
+  .guarantee-points { display: flex; flex-direction: column; gap: .6rem; }
+  .guarantee-point {
+    display: flex; align-items: center; gap: .5rem;
+    font-size: .83rem; color: var(--dark); font-weight: 600;
+  }
+  .guarantee-point span { color: var(--sky); font-size: 1rem; }
 
   /* ── CTA ── */
   .cta {
     background: linear-gradient(135deg, var(--sky) 0%, var(--deep) 100%);
-    text-align: center; padding: 5rem 8%;
+    text-align: center; padding: 4rem 5%;
   }
-  .cta h2 { color: var(--white); margin-bottom: 1rem; }
-  .cta p { color: rgba(255,255,255,0.75); margin-bottom: 2rem; font-size: .95rem; }
+  .cta h2 { color: var(--white); margin-bottom: .8rem; }
+  .cta p { color: rgba(255,255,255,0.75); margin-bottom: 1.8rem; font-size: .9rem; }
 
-  /* ── CONTACT FORM ── */
+  /* ── CONTACT ── */
   #contact { background: var(--frost); }
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 4rem;
-    align-items: start;
-  }
-  @media(max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
-  .contact-info h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; }
-  .contact-detail {
-    display: flex; gap: .75rem; align-items: flex-start;
-    margin-bottom: 1.2rem;
-  }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: start; }
+  .contact-info h3 { font-size: 1rem; font-weight: 700; margin-bottom: 1.2rem; }
+  .contact-detail { display: flex; gap: .65rem; align-items: flex-start; margin-bottom: 1rem; }
   .contact-detail-icon {
-    width: 38px; height: 38px;
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 8px;
+    width: 36px; height: 36px; background: var(--white);
+    border: 1px solid var(--border); border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 1rem; flex-shrink: 0;
+    font-size: .9rem; flex-shrink: 0;
   }
-  .contact-detail-text .label { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
-  .contact-detail-text .value { font-weight: 600; font-size: .95rem; color: var(--dark); }
+  .contact-detail-text .label { font-size: .68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  .contact-detail-text .value { font-weight: 600; font-size: .9rem; color: var(--dark); }
   .contact-detail-text a { color: inherit; text-decoration: none; }
 
-  .form-group { margin-bottom: 1rem; }
-  .form-group label { display: block; font-size: .75rem; font-weight: 600; color: var(--muted); margin-bottom: .35rem; letter-spacing: .5px; text-transform: uppercase; }
-  .form-group input, .form-group textarea, .form-group select.light {
-    width: 100%;
-    border: 1.5px solid #e2e8f0;
-    background: var(--white);
-    color: var(--text);
-    padding: .75rem 1rem;
-    border-radius: 6px;
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: .88rem;
-    outline: none;
-    transition: border-color .2s;
+  .form-group { margin-bottom: .9rem; }
+  .form-group label { display: block; font-size: .72rem; font-weight: 600; color: var(--muted); margin-bottom: .3rem; letter-spacing: .5px; text-transform: uppercase; }
+  .form-group input.light, .form-group textarea.light, .form-group select.light {
+    width: 100%; border: 1.5px solid #e2e8f0; background: var(--white);
+    color: var(--text); padding: .7rem .9rem; border-radius: 6px;
+    font-family: 'Nunito Sans', sans-serif; font-size: .85rem; outline: none; transition: border-color .2s;
+    appearance: none; -webkit-appearance: none;
   }
-  .form-group input:focus, .form-group textarea:focus, .form-group select.light:focus { border-color: var(--sky); }
-  .form-group textarea { min-height: 100px; resize: vertical; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group input.light:focus, .form-group textarea.light:focus, .form-group select.light:focus { border-color: var(--sky); }
+  .form-group textarea.light { min-height: 90px; resize: vertical; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
 
   /* ── FOOTER ── */
   footer {
-    background: var(--dark);
-    color: rgba(255,255,255,0.45);
-    padding: 2.5rem 8%;
+    background: var(--dark); color: rgba(255,255,255,0.45);
+    padding: 2rem 5%;
     display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 1rem;
-    font-size: .8rem;
+    flex-wrap: wrap; gap: 1rem; font-size: .78rem;
   }
   footer a { color: var(--accent); text-decoration: none; }
-  .footer-logo {
-    font-family: 'Unbounded', sans-serif;
-    font-size: 1.1rem;
-    color: var(--accent);
-    letter-spacing: 0;
-    font-weight: 700;
-    text-decoration: none;
-  }
+  .footer-logo { font-family: 'Unbounded', sans-serif; font-size: 1rem; color: var(--accent); font-weight: 700; text-decoration: none; }
 
-  /* Animations */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .fade-up { animation: fadeUp .7s ease both; }
-  .fade-up:nth-child(2) { animation-delay: .1s; }
-  .fade-up:nth-child(3) { animation-delay: .2s; }
-  .fade-up:nth-child(4) { animation-delay: .3s; }
-
-  /* Modal */
-  .modal-overlay {
-    display: none;
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.6);
-    z-index: 200;
-    align-items: center; justify-content: center;
-  }
+  /* ── MODAL ── */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 200; align-items: center; justify-content: center; }
   .modal-overlay.open { display: flex; }
-  .modal {
-    background: var(--white);
-    border-radius: 12px;
-    padding: 2.5rem;
-    max-width: 420px;
-    width: 90%;
-    text-align: center;
-    animation: fadeUp .3s ease;
+  .modal { background: var(--white); border-radius: 12px; padding: 2rem; max-width: 400px; width: 90%; text-align: center; }
+  .modal h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: .6rem; color: var(--dark); }
+  .modal p { color: var(--muted); font-size: .88rem; margin-bottom: 1.3rem; line-height: 1.6; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    nav { padding: 0 4%; height: 56px; }
+    .nav-links { display: none; }
+    .nav-phone { font-size: .85rem; }
+
+    .hero { padding: 70px 4% 3rem; }
+    .hero h1 { font-size: clamp(1.55rem, 8vw, 2.5rem); }
+    .hero-stats { gap: 1.2rem; }
+    .stat-num { font-size: 1.5rem; }
+
+    section { padding: 3rem 4%; }
+    h2 { font-size: clamp(1.2rem, 5vw, 1.8rem); }
+
+    .services-grid { grid-template-columns: 1fr; }
+    .steps { flex-direction: column; }
+    .step::after { display: none; }
+    .step { padding: 1rem 0; text-align: left; display: flex; gap: 1rem; align-items: flex-start; }
+    .step-num { flex-shrink: 0; margin: 0; }
+    .step-body { flex: 1; }
+
+    .calc-wrapper { grid-template-columns: 1fr; gap: 1.5rem; }
+    .calc-result { position: static; }
+    .field-row { grid-template-columns: 1fr; }
+
+    .why-grid { grid-template-columns: 1fr; }
+
+    .guarantee-inner { flex-direction: column; gap: 1.5rem; text-align: center; }
+    .guarantee-quote { text-align: left; }
+    .guarantee-points { align-items: flex-start; }
+
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .form-row { grid-template-columns: 1fr; }
+
+    footer { flex-direction: column; text-align: center; }
   }
-  .modal h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: .75rem; color: var(--dark); }
-  .modal p { color: var(--muted); font-size: .9rem; margin-bottom: 1.5rem; line-height: 1.6; }
-  .modal .btn-primary { display: inline-block; }
 
-
+  @media (max-width: 400px) {
+    .hero h1 { font-size: 1.45rem; }
+    .hero-btns { flex-direction: column; }
+    .btn-primary, .btn-outline { text-align: center; }
+  }
 </style>
 </head>
 <body>
@@ -581,30 +444,28 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="crystal"></div>
-  <div class="crystal"></div>
+  <div class="glow"></div>
+  <div class="glow"></div>
   <div class="hero-inner">
-    <div class="hero-content">
-      <div class="hero-badge">Москва и Московская область</div>
-      <h1>Обслуживание<br><em>кондиционеров</em><br>под ключ</h1>
-      <p>Профессиональная чистка, заправка и ремонт кондиционеров любых марок. Выезд мастера в день обращения. Гарантия на все виды работ.</p>
-      <div class="hero-btns">
-        <a href="#calculator" class="btn-primary">Рассчитать стоимость</a>
-        <a href="#contact" class="btn-outline">Оставить заявку</a>
+    <div class="hero-badge">Москва и Московская область</div>
+    <h1>Обслуживание<br><em>кондиционеров</em><br>под ключ</h1>
+    <p class="hero-desc">Профессиональная чистка, заправка и ремонт кондиционеров любых марок. Выезд мастера в день обращения. Гарантия на все виды работ.</p>
+    <div class="hero-btns">
+      <a href="#calculator" class="btn-primary">Рассчитать стоимость</a>
+      <a href="#contact" class="btn-outline">Оставить заявку</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">3200+</div>
+        <div class="stat-label">клиентов</div>
       </div>
-      <div class="hero-stats">
-        <div class="stat">
-          <div class="stat-num">3200+</div>
-          <div class="stat-label">клиентов</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">12</div>
-          <div class="stat-label">лет опыта</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">24/7</div>
-          <div class="stat-label">поддержка</div>
-        </div>
+      <div class="stat">
+        <div class="stat-num">12</div>
+        <div class="stat-label">лет опыта</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">поддержка</div>
       </div>
     </div>
   </div>
@@ -616,37 +477,37 @@
   <h2>Наши услуги</h2>
   <p class="section-lead">Полный спектр работ по обслуживанию бытовых и полупромышленных кондиционеров в Москве и области.</p>
   <div class="services-grid">
-    <div class="service-card fade-up">
+    <div class="service-card">
       <div class="service-icon">🧹</div>
       <h3>Чистка и дезинфекция</h3>
       <p>Профессиональная промывка фильтров, теплообменника и дренажной системы. Устранение запахов и бактерий.</p>
       <div class="service-price">от 1 500 ₽ <small>/ единица</small></div>
     </div>
-    <div class="service-card fade-up">
+    <div class="service-card">
       <div class="service-icon">❄️</div>
       <h3>Заправка фреоном</h3>
-      <p>Диагностика утечки, дозаправка или полная замена хладагента. Работаем со всеми типами фреона (R22, R32, R410A).</p>
+      <p>Диагностика утечки, дозаправка или полная замена хладагента. Работаем со всеми типами фреона.</p>
       <div class="service-price">от 2 500 ₽ <small>/ единица</small></div>
     </div>
-    <div class="service-card fade-up">
+    <div class="service-card">
       <div class="service-icon">🔧</div>
       <h3>Техническое обслуживание</h3>
       <p>Плановый ТО с проверкой всех систем, чисткой, тестированием и смазкой подвижных элементов.</p>
       <div class="service-price">от 2 000 ₽ <small>/ единица</small></div>
     </div>
-    <div class="service-card fade-up">
+    <div class="service-card">
       <div class="service-icon">🔩</div>
       <h3>Ремонт</h3>
-      <p>Диагностика и устранение неисправностей: замена компрессора, платы управления, вентиляторов и дренажной помпы.</p>
+      <p>Диагностика и устранение неисправностей: замена компрессора, платы управления, вентиляторов.</p>
       <div class="service-price">от 1 000 ₽ <small>диагностика</small></div>
     </div>
-    <div class="service-card fade-up">
+    <div class="service-card">
       <div class="service-icon">🏗️</div>
       <h3>Монтаж и демонтаж</h3>
       <p>Установка сплит-систем «под ключ», перенос внешних блоков, прокладка трасс в штробе.</p>
       <div class="service-price">от 5 000 ₽ <small>монтаж</small></div>
     </div>
-    <div class="service-card fade-up">
+    <div class="service-card">
       <div class="service-icon">📋</div>
       <h3>Договор на обслуживание</h3>
       <p>Годовой договор для юрлиц и управляющих компаний. Плановые выезды, приоритет и скидка 20%.</p>
@@ -663,28 +524,38 @@
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
-      <h3>Оставьте заявку</h3>
-      <p>По телефону, в форме на сайте или в WhatsApp — как вам удобнее</p>
+      <div class="step-body">
+        <h3>Оставьте заявку</h3>
+        <p>По телефону, в форме на сайте или в WhatsApp — как вам удобнее</p>
+      </div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
-      <h3>Согласуем время</h3>
-      <p>Перезвоним в течение 15 минут и назначим удобное время выезда</p>
+      <div class="step-body">
+        <h3>Согласуем время</h3>
+        <p>Перезвоним в течение 15 минут и назначим удобное время выезда</p>
+      </div>
     </div>
     <div class="step">
       <div class="step-num">3</div>
-      <h3>Мастер приедет</h3>
-      <p>В день обращения или в оговорённое время. Мастер в форме с инструментами</p>
+      <div class="step-body">
+        <h3>Мастер приедет</h3>
+        <p>В день обращения или в оговорённое время. Мастер в форме с инструментами</p>
+      </div>
     </div>
     <div class="step">
       <div class="step-num">4</div>
-      <h3>Выполним работу</h3>
-      <p>Профессионально, аккуратно и быстро. Уберём за собой</p>
+      <div class="step-body">
+        <h3>Выполним работу</h3>
+        <p>Профессионально, аккуратно и быстро. Уберём за собой</p>
+      </div>
     </div>
     <div class="step">
       <div class="step-num">5</div>
-      <h3>Гарантия</h3>
-      <p>Выдадим акт выполненных работ и гарантийный талон</p>
+      <div class="step-body">
+        <h3>Гарантия</h3>
+        <p>Выдадим акт выполненных работ и гарантийный талон</p>
+      </div>
     </div>
   </div>
 </section>
@@ -749,31 +620,31 @@
         <label class="field-label">Дополнительные работы</label>
         <div class="checkbox-group">
           <label class="checkbox-item">
-            <input type="checkbox" id="add-drain" value="800">
+            <input type="checkbox" id="add-drain">
             <span class="checkmark"></span>
             Прочистка дренажа
             <span class="extra-price">+800 ₽</span>
           </label>
           <label class="checkbox-item">
-            <input type="checkbox" id="add-antibac" value="500">
+            <input type="checkbox" id="add-antibac">
             <span class="checkmark"></span>
             Антибактериальная обработка
             <span class="extra-price">+500 ₽</span>
           </label>
           <label class="checkbox-item">
-            <input type="checkbox" id="add-leak" value="1200">
+            <input type="checkbox" id="add-leak">
             <span class="checkmark"></span>
             Поиск и устранение утечки
             <span class="extra-price">+1 200 ₽</span>
           </label>
           <label class="checkbox-item">
-            <input type="checkbox" id="add-urgent" value="1000">
+            <input type="checkbox" id="add-urgent">
             <span class="checkmark"></span>
             Срочный выезд (до 2 часов)
             <span class="extra-price">+1 000 ₽</span>
           </label>
           <label class="checkbox-item">
-            <input type="checkbox" id="add-mmo" value="500">
+            <input type="checkbox" id="add-mmo">
             <span class="checkmark"></span>
             Выезд за МКАД (до 30 км)
             <span class="extra-price">+500 ₽</span>
@@ -849,29 +720,23 @@
 </section>
 
 <!-- GUARANTEE -->
-<section class="guarantee-section" style="background:var(--white);padding:5rem 8%;">
-  <div class="guarantee-inner" style="max-width:860px;margin:0 auto;display:flex;gap:3rem;align-items:center;flex-wrap:wrap;">
-    <div class="guarantee-avatar" style="flex-shrink:0;text-align:center;">
-      <div style="width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--sky),var(--deep));display:flex;align-items:center;justify-content:center;font-size:3rem;margin:0 auto 1rem;">👨‍🔧</div>
-      <div style="font-weight:700;font-size:.95rem;color:var(--dark);">Роман Николаевич</div>
-      <div style="font-size:.78rem;color:var(--muted);margin-top:.25rem;">Руководитель сервиса</div>
+<section class="guarantee">
+  <div class="guarantee-inner">
+    <div class="guarantee-avatar">
+      <div class="avatar-circle">👨‍🔧</div>
+      <div class="guarantee-name">Роман Николаевич</div>
+      <div class="guarantee-role">Руководитель сервиса</div>
     </div>
-    <div style="flex:1;min-width:260px;">
+    <div class="guarantee-body">
       <div class="section-tag" style="margin-bottom:.5rem;">Личная гарантия</div>
       <h2 style="margin-bottom:1rem;">Гарантирую качество<br>каждого выезда</h2>
-      <blockquote style="border-left:3px solid var(--sky);padding-left:1.25rem;margin:0 0 1.5rem;color:var(--text);font-size:.95rem;line-height:1.75;font-style:normal;">
+      <blockquote class="guarantee-quote">
         «Я лично отвечаю за каждую выполненную работу. Если вас что-то не устроит — мы вернёмся и устраним проблему бесплатно. Моё имя стоит за каждым мастером, которого мы отправляем к вам домой.»
       </blockquote>
-      <div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
-        <div style="display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--dark);font-weight:600;">
-          <span style="color:var(--sky);font-size:1.1rem;">✅</span> Гарантия на работы — до 2 лет
-        </div>
-        <div style="display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--dark);font-weight:600;">
-          <span style="color:var(--sky);font-size:1.1rem;">✅</span> Бесплатный повторный выезд
-        </div>
-        <div style="display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--dark);font-weight:600;">
-          <span style="color:var(--sky);font-size:1.1rem;">✅</span> Письменный гарантийный талон
-        </div>
+      <div class="guarantee-points">
+        <div class="guarantee-point"><span>✅</span> Гарантия на работы — до 2 лет</div>
+        <div class="guarantee-point"><span>✅</span> Бесплатный повторный выезд</div>
+        <div class="guarantee-point"><span>✅</span> Письменный гарантийный талон</div>
       </div>
     </div>
   </div>
@@ -909,7 +774,7 @@
         <div class="contact-detail-icon">✉️</div>
         <div class="contact-detail-text">
           <div class="label">Email</div>
-          <div class="value"><a href="/cdn-cgi/l/email-protection#4736702f282e3f3d33213d722d072a262e2b693532"><span class="__cf_email__" data-cfemail="b7c680dfd8decfcdc3d1cd82ddf7dad6dedb99c5c2">[email&#160;protected]</span></a></div>
+          <div class="value"><a href="mailto:info@nejarko.ru">info@nejarko.ru</a></div>
         </div>
       </div>
       <div class="contact-detail">
@@ -928,20 +793,20 @@
       </div>
     </div>
 
-    <form id="contact-form-wrapper" action="https://formspree.io/f/xnjgwvwq" method="POST">
+    <form id="contact-form" action="https://formspree.io/f/xnjgwvwq" method="POST">
       <div class="form-row">
         <div class="form-group">
           <label for="field-name">Ваше имя</label>
-          <input type="text" id="field-name" name="name" placeholder="Иван Петров">
+          <input class="light" type="text" id="field-name" name="name" placeholder="Иван Петров">
         </div>
         <div class="form-group">
-          <label for="field-phone">Телефон</label>
-          <input type="text" id="phone-input" name="phone" placeholder="+7 (___) ___-__-__">
+          <label for="phone-input">Телефон</label>
+          <input class="light" type="text" id="phone-input" name="phone" placeholder="+7 (___) ___-__-__">
         </div>
       </div>
       <div class="form-group">
         <label for="field-address">Адрес</label>
-        <input type="text" id="field-address" name="address" placeholder="Москва, ул. Примерная, д. 10">
+        <input class="light" type="text" id="field-address" name="address" placeholder="Москва, ул. Примерная, д. 10">
       </div>
       <div class="form-group">
         <label for="field-service">Услуга</label>
@@ -957,14 +822,12 @@
       </div>
       <div class="form-group">
         <label for="field-comment">Комментарий</label>
-        <textarea id="field-comment" name="comment" placeholder="Опишите проблему или уточните детали..."></textarea>
+        <textarea class="light" id="field-comment" name="comment" placeholder="Опишите проблему или уточните детали..."></textarea>
       </div>
-      <!-- скрытое поле — тема письма -->
       <input type="hidden" name="_subject" value="Новая заявка с сайта НеЖарко">
-      <!-- редирект после отправки обратно на сайт -->
       <input type="hidden" name="_next" value="?sent=1">
       <button type="submit" class="btn-primary" style="width:100%">Отправить заявку</button>
-      <p style="font-size:.75rem;color:var(--muted);margin-top:.75rem">Нажимая кнопку, вы соглашаетесь с <a href="#" style="color:var(--sky)">политикой конфиденциальности</a></p>
+      <p style="font-size:.72rem;color:var(--muted);margin-top:.6rem">Нажимая кнопку, вы соглашаетесь с <a href="#" style="color:var(--sky)">политикой конфиденциальности</a></p>
     </form>
   </div>
 </section>
@@ -973,7 +836,7 @@
 <footer>
   <div>
     <a href="#" class="footer-logo">НеЖарко</a>
-    <div style="margin-top:.4rem">© 2024 ООО «НеЖарко». Все права защищены.</div>
+    <div style="margin-top:.3rem">© 2024 ООО «НеЖарко». Все права защищены.</div>
   </div>
   <div>
     <a href="#">Политика конфиденциальности</a> &nbsp;·&nbsp;
@@ -984,28 +847,23 @@
 <!-- MODAL -->
 <div class="modal-overlay" id="modal">
   <div class="modal">
-    <div style="font-size:2.5rem;margin-bottom:1rem">✅</div>
+    <div style="font-size:2.2rem;margin-bottom:.8rem">✅</div>
     <h3>Расчёт отправлен!</h3>
     <p>Мастер свяжется с вами в течение 15 минут для уточнения деталей и подтверждения стоимости.</p>
     <button class="btn-primary" id="btn-close-modal">Отлично, жду звонка</button>
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 document.addEventListener('DOMContentLoaded', function () {
 
   /* ── КАЛЬКУЛЯТОР ── */
-  var prices = { main: 0, type: 0, power: 0, qty: 1, drain: 0, antibac: 0, leak: 0, urgent: 0, mmo: 0 };
-
-  function fmt(n) {
-    return n.toLocaleString('ru-RU');
-  }
+  function fmt(n) { return n.toLocaleString('ru-RU'); }
 
   function makeRow(label, sub, amount) {
-    return '<div class="result-row">'
-      + '<span>' + label + (sub ? '<br><small style="opacity:.5;font-size:.72rem">' + sub + '</small>' : '') + '</span>'
-      + '<span class="result-amount">' + amount + ' ₽</span>'
-      + '</div>';
+    return '<div class="result-row"><span>' + label
+      + (sub ? '<br><small style="opacity:.5;font-size:.7rem">' + sub + '</small>' : '')
+      + '</span><span class="result-amount">' + amount + ' ₽</span></div>';
   }
 
   function calcUpdate() {
@@ -1014,159 +872,112 @@ document.addEventListener('DOMContentLoaded', function () {
     var powSel  = document.getElementById('ac-power');
     var qtySel  = document.getElementById('qty');
 
-    prices.main   = parseInt(mainSel.value) || 0;
-    prices.type   = parseInt(typeSel.value) || 0;
-    prices.power  = parseInt(powSel.value)  || 0;
-    prices.qty    = parseInt(qtySel.value)  || 1;
-    prices.drain  = document.getElementById('add-drain').checked   ? 800  : 0;
-    prices.antibac= document.getElementById('add-antibac').checked ? 500  : 0;
-    prices.leak   = document.getElementById('add-leak').checked    ? 1200 : 0;
-    prices.urgent = document.getElementById('add-urgent').checked  ? 1000 : 0;
-    prices.mmo    = document.getElementById('add-mmo').checked     ? 500  : 0;
+    var main   = parseInt(mainSel.value) || 0;
+    var type   = parseInt(typeSel.value) || 0;
+    var power  = parseInt(powSel.value)  || 0;
+    var qty    = parseInt(qtySel.value)  || 1;
+    var drain  = document.getElementById('add-drain').checked   ? 800  : 0;
+    var antibac= document.getElementById('add-antibac').checked ? 500  : 0;
+    var leak   = document.getElementById('add-leak').checked    ? 1200 : 0;
+    var urgent = document.getElementById('add-urgent').checked  ? 1000 : 0;
+    var mmo    = document.getElementById('add-mmo').checked     ? 500  : 0;
 
-    var basePerUnit = prices.main + prices.type + prices.power;
-    var addons      = prices.drain + prices.antibac + prices.leak + prices.urgent + prices.mmo;
-    var subtotal    = basePerUnit * prices.qty;
-    var discount    = (prices.qty >= 3) ? Math.round(subtotal * 0.1) : 0;
+    var basePerUnit = main + type + power;
+    var addons      = drain + antibac + leak + urgent + mmo;
+    var subtotal    = basePerUnit * qty;
+    var discount    = (qty >= 3) ? Math.round(subtotal * 0.1) : 0;
     var total       = subtotal + addons - discount;
 
     var rows = '';
-    if (prices.main) {
-      rows += makeRow(mainSel.options[mainSel.selectedIndex].text,
-        fmt(prices.main) + ' ₽ × ' + prices.qty + ' ед.',
-        fmt(prices.main * prices.qty));
-    }
-    if (prices.type)   rows += makeRow('Надбавка за тип',        '+' + fmt(prices.type)  + ' ₽ × ' + prices.qty, fmt(prices.type  * prices.qty));
-    if (prices.power)  rows += makeRow('Надбавка за мощность',   '+' + fmt(prices.power) + ' ₽ × ' + prices.qty, fmt(prices.power * prices.qty));
-    if (prices.drain)  rows += makeRow('Прочистка дренажа',      '', fmt(prices.drain));
-    if (prices.antibac)rows += makeRow('Антибактериальная обработка', '', fmt(prices.antibac));
-    if (prices.leak)   rows += makeRow('Поиск утечки',           '', fmt(prices.leak));
-    if (prices.urgent) rows += makeRow('Срочный выезд',          '', fmt(prices.urgent));
-    if (prices.mmo)    rows += makeRow('Выезд за МКАД',          '', fmt(prices.mmo));
-    if (discount > 0)  rows += makeRow('Скидка 10% (от 3 ед.)',  '', '−' + fmt(discount));
+    if (main) rows += makeRow(mainSel.options[mainSel.selectedIndex].text, fmt(main) + ' ₽ × ' + qty + ' ед.', fmt(main * qty));
+    if (type)   rows += makeRow('Надбавка за тип',      '+' + fmt(type)   + ' ₽ × ' + qty, fmt(type   * qty));
+    if (power)  rows += makeRow('Надбавка за мощность', '+' + fmt(power)  + ' ₽ × ' + qty, fmt(power  * qty));
+    if (drain)  rows += makeRow('Прочистка дренажа', '', fmt(drain));
+    if (antibac)rows += makeRow('Антибактериальная обработка', '', fmt(antibac));
+    if (leak)   rows += makeRow('Поиск утечки', '', fmt(leak));
+    if (urgent) rows += makeRow('Срочный выезд', '', fmt(urgent));
+    if (mmo)    rows += makeRow('Выезд за МКАД', '', fmt(mmo));
+    if (discount > 0) rows += makeRow('Скидка 10% (от 3 ед.)', '', '−' + fmt(discount));
 
-    if (!prices.main) {
+    if (!main) {
       rows = '<div class="result-row"><span>Выберите услугу...</span><span class="result-amount">—</span></div>';
     } else {
-      rows += '<div class="result-row total"><span>Итого</span>'
-            + '<span class="result-amount total-amount">' + fmt(total) + ' ₽</span></div>';
+      rows += '<div class="result-row total"><span>Итого</span><span class="result-amount total-amount">' + fmt(total) + ' ₽</span></div>';
     }
     document.getElementById('result-rows').innerHTML = rows;
   }
 
-  // навешиваем события на все поля калькулятора
-  ['ac-type', 'ac-power', 'main-service', 'qty',
-   'add-drain', 'add-antibac', 'add-leak', 'add-urgent', 'add-mmo'
-  ].forEach(function(id) {
-    var el = document.getElementById(id);
-    if (el) el.addEventListener('change', calcUpdate);
-  });
+  ['ac-type','ac-power','main-service','qty','add-drain','add-antibac','add-leak','add-urgent','add-mmo']
+    .forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('change', calcUpdate);
+    });
 
   /* ── МОДАЛЬНОЕ ОКНО ── */
   var modal = document.getElementById('modal');
+  function openModal()  { if (modal) modal.classList.add('open'); }
+  function closeModal() { if (modal) modal.classList.remove('open'); }
 
-  function openModal() {
-    if (modal) modal.classList.add('open');
-  }
-  function closeModal() {
-    if (modal) modal.classList.remove('open');
-  }
+  var btnSend = document.getElementById('btn-send-calc');
+  if (btnSend) btnSend.addEventListener('click', function () {
+    if (!document.getElementById('main-service').value) { alert('Пожалуйста, выберите основную услугу.'); return; }
+    openModal();
+  });
+  var btnClose = document.getElementById('btn-close-modal');
+  if (btnClose) btnClose.addEventListener('click', closeModal);
+  if (modal) modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
 
-  // кнопка «Отправить расчёт мастеру»
-  var btnSendCalc = document.getElementById('btn-send-calc');
-  if (btnSendCalc) {
-    btnSendCalc.addEventListener('click', function () {
-      var main = document.getElementById('main-service').value;
-      if (!main) { alert('Пожалуйста, выберите основную услугу.'); return; }
-      openModal();
-    });
-  }
-
-  // кнопка закрытия модалки
-  var btnCloseModal = document.getElementById('btn-close-modal');
-  if (btnCloseModal) btnCloseModal.addEventListener('click', closeModal);
-
-  // клик на фон модалки
-  if (modal) {
-    modal.addEventListener('click', function (e) {
-      if (e.target === modal) closeModal();
-    });
-  }
-
-
-
-  /* ── УСПЕШНАЯ ОТПРАВКА ФОРМЫ ── */
+  /* ── УСПЕШНАЯ ОТПРАВКА ── */
   if (window.location.search.indexOf('sent=1') !== -1) {
-    var wrapper = document.getElementById('contact-form-wrapper');
-    if (wrapper) {
-      wrapper.insertAdjacentHTML('beforebegin',
-        '<div style="background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.4);'
-        + 'border-radius:8px;padding:1rem 1.25rem;margin-bottom:1.25rem;color:#166534;font-weight:600;font-size:.9rem;">'
-        + '✅ Заявка отправлена! Перезвоним вам в течение 15 минут.</div>'
-      );
-    }
+    var form = document.getElementById('contact-form');
+    if (form) form.insertAdjacentHTML('beforebegin',
+      '<div style="background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.4);border-radius:8px;padding:.9rem 1.1rem;margin-bottom:1rem;color:#166534;font-weight:600;font-size:.88rem;">✅ Заявка отправлена! Перезвоним в течение 15 минут.</div>');
   }
 
-
-  /* ── ПОЛЕ ИМЯ: только буквы, автозаглавные ── */
+  /* ── ПОЛЕ ИМЯ ── */
   var nameInput = document.getElementById('field-name');
   if (nameInput) {
-    // блокируем ввод цифр на уровне keydown
-    nameInput.addEventListener('keydown', function (e) {
-      if (e.key >= '0' && e.key <= '9') e.preventDefault();
-    });
-
-    nameInput.addEventListener('input', function () {
-      // удаляем любые цифры (на случай вставки)
+    nameInput.addEventListener('keydown', function(e) { if (e.key >= '0' && e.key <= '9') e.preventDefault(); });
+    nameInput.addEventListener('input', function() {
       var pos = this.selectionStart;
-      var cleaned = this.value.replace(/[0-9]/g, '');
-      // каждое слово с заглавной буквы
-      cleaned = cleaned.replace(/(?:^|\s)\S/g, function (ch) {
-        return ch.toUpperCase();
-      });
-      if (this.value !== cleaned) {
-        this.value = cleaned;
-        // восстанавливаем позицию курсора
-        try { this.setSelectionRange(pos, pos); } catch(e) {}
-      }
+      var cleaned = this.value.replace(/[0-9]/g, '').replace(/(?:^|\s)\S/g, function(ch) { return ch.toUpperCase(); });
+      if (this.value !== cleaned) { this.value = cleaned; try { this.setSelectionRange(pos, pos); } catch(e){} }
     });
   }
 
   /* ── МАСКА ТЕЛЕФОНА ── */
+  var phoneInput = document.getElementById('phone-input');
   if (phoneInput) {
     var PREFIX = '+7 (';
-
-    phoneInput.addEventListener('focus', function () {
-      if (!this.value) this.value = PREFIX;
+    phoneInput.addEventListener('focus', function() { if (!this.value) this.value = PREFIX; });
+    phoneInput.addEventListener('keydown', function(e) {
+      if ((e.key === 'Backspace' || e.key === 'Delete') && this.selectionStart <= PREFIX.length) e.preventDefault();
     });
-
-    phoneInput.addEventListener('keydown', function (e) {
-      if ((e.key === 'Backspace' || e.key === 'Delete') && this.selectionStart <= PREFIX.length) {
-        e.preventDefault();
-      }
-    });
-
-    phoneInput.addEventListener('input', function () {
+    phoneInput.addEventListener('input', function() {
       var raw = this.value.replace(/\D/g, '');
       if (raw.charAt(0) === '7' || raw.charAt(0) === '8') raw = raw.slice(1);
       raw = raw.slice(0, 10);
-
       var out = '+7 (';
       if (raw.length > 0) out += raw.slice(0, 3);
       if (raw.length >= 4) out += ') ' + raw.slice(3, 6);
       if (raw.length >= 7) out += '-' + raw.slice(6, 8);
       if (raw.length >= 9) out += '-' + raw.slice(8, 10);
-
       this.value = out;
     });
-
-    phoneInput.addEventListener('blur', function () {
-      if (this.value === PREFIX || this.value === '+7 ()') this.value = '';
-    });
+    phoneInput.addEventListener('blur', function() { if (this.value === PREFIX || this.value === '+7 ()') this.value = ''; });
   }
 
-  /* ── ПЛАВНАЯ ПРОКРУТКА по якорям ── */
-  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
-    link.addEventListener('click', function (e) {
+  /* ── ПЛАВНАЯ ПРОКРУТКА ── */
+  document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
       var href = this.getAttribute('href');
-      if
+      if (href === '#') return;
+      var target = document.querySelector(href);
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+});
+</script>
+</body>
+</html>
